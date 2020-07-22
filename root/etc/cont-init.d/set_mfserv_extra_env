@@ -1,0 +1,17 @@
+#!/usr/bin/with-contenv bash
+
+env |grep ^MFSERV |grep -v MFSERV_CONFIG_URL |grep -v MFSERV_PLUGINS_URLS |grep -v ^MFSERV_PLUGINS_CONFIGS_URLS |awk -F '=' '{print $1;}' >/tmp/env.keys
+N=$(cat /tmp/env.keys |wc -l)
+if test "${N}" -eq 0; then
+  rm -f /tmp/env.keys
+  exit 0
+fi
+
+echo "# CUSTOM PROFILE FORCED BY DOCKER ENV" >/home/mfserv/.metwork.custom_profile
+for KEY in $(cat /tmp/env.keys); do
+  VALUE=$(printenv "${KEY}")
+  echo "export ${KEY}=\"${VALUE}\"" >>/home/mfserv/.metwork.custom_profile
+done
+echo ". ~/.metwork.custom_profile" >/home/mfserv/.metwork.custom_interactive_profile
+
+rm -f /tmp/env.keys

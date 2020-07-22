@@ -1,0 +1,11 @@
+#!/usr/bin/with-contenv bash
+
+if test "${MFSERV_PLUGINS_URLS}" = ""; then
+    exit 0
+fi
+
+cd /etc/metwork.config.d/mfserv/plugins/ || exit 1
+for URL in ${MFSERV_PLUGINS_URLS//,/ }; do
+    echo "Downloading ${URL} into /etc/metwork.config.d/mfserv/plugins/..."
+    wget --content-disposition "${URL}"  || exit 1
+done

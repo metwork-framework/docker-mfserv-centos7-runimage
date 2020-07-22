@@ -1,7 +1,11 @@
 FROM metwork/centos7-opinionated:latest
 MAINTAINER Fabien MARTY <fabien.marty@gmail.com>
 
-ENV S6_KILL_FINISH_MAXTIME 300000
+ENV S6_KILL_FINISH_MAXTIME=300000 \
+    METWORK_CONFIG= \
+    MFSERV_CONFIG_URL= \
+    MFSERV_PLUGINS_URLS= \
+    MFSERV_PLUGINS_CONFIGS_URLS=
 
 COPY root /
 
