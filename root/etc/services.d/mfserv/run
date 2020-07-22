@@ -1,0 +1,28 @@
+#!/bin/bash
+
+function waiting_for_stop() {
+  # SIGTERM/SIGINT caught, waiting for smart shutdown
+  while true; do
+    STATUS=$(cat /home/mfserv/var/status 2>/dev/null)
+    if test "${STATUS}" = "STOPPED";  then
+      # stopped
+      exit 0
+    fi
+    sleep 1
+  done
+}
+
+STARTUP_SCRIPT=/etc/rc.d/init.d/metwork
+
+trap waiting_for_stop SIGTERM
+trap waiting_for_stop SIGINT
+
+# Starting services
+sleep 1
+echo
+"${STARTUP_SCRIPT}" start
+
+# Waiting for SIGTERM/SIGINT
+while true; do
+  sleep 1
+done

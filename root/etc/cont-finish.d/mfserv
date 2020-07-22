@@ -1,0 +1,8 @@
+#!/bin/bash
+
+STARTUP_SCRIPT=/etc/rc.d/init.d/metwork
+
+# Stopping services
+sleep 1
+echo
+"${STARTUP_SCRIPT}" stop
