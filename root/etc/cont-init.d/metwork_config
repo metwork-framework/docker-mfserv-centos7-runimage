@@ -1,0 +1,6 @@
+#!/usr/bin/with-contenv bash
+
+if test "${METWORK_CONFIG}" != ""; then
+    echo "Setting '${METWORK_CONFIG}' in /etc/metwork.config..."
+    echo "${METWORK_CONFIG}" >/etc/metwork.config
+fi
