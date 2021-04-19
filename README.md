@@ -10,8 +10,19 @@ but [docker-mfservplugins-centos7-buildimage](https://github.com/metwork-framewo
 
 ## How to use it?
 
+To debug:
+
 ```
-docker run -it -v 8080:18868 -e MFSERV_PLUGINS_URLS=http://.../yourplugin.plugin bash
+docker run -it -p 8080:18868 -e MFSERV_PLUGINS_URLS=http://.../yourplugin.plugin metwork/mfserv-centos7-runimage:latest cat
 ```
+
+*CONTROL + C to exit*
+
+To run as a daemon:
+
+```
+docker run -d -p 8080:18868 -e MFSERV_PLUGINS_URLS=http://.../yourplugin.plugin metwork/mfserv-centos7-runimage:latest
+```
+
 
 See Dockerfile for more options.
