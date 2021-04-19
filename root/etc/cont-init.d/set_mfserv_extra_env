@@ -7,11 +7,10 @@ if test "${N}" -eq 0; then
   exit 0
 fi
 
-echo "# CUSTOM PROFILE FORCED BY DOCKER ENV" >/home/mfserv/.metwork.custom_profile
+echo "# CUSTOM PROFILE FORCED BY DOCKER ENV" >/etc/metwork.extraprofile
 for KEY in $(cat /tmp/env.keys); do
   VALUE=$(printenv "${KEY}")
-  echo "export ${KEY}=\"${VALUE}\"" >>/home/mfserv/.metwork.custom_profile
+  echo "export ${KEY}=\"${VALUE}\"" >>/etc/metwork.extraprofile
 done
-echo ". ~/.metwork.custom_profile" >/home/mfserv/.metwork.custom_interactive_profile
 
 rm -f /tmp/env.keys

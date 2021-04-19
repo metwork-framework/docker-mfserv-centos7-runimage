@@ -1,0 +1,9 @@
+#!/usr/bin/with-contenv bash
+
+if test "${MFSERV_CONFIG_URL}" = ""; then
+    exit 0
+fi
+
+cd /etc/metwork.config.d/mfserv/ || exit 1
+echo "Downloading ${MFSERV_CONFIG_URL} into /etc/metwork.config.d/mfserv/..."
+wget -O config.ini "${MFSERV_CONFIG_URL}" || exit 1
